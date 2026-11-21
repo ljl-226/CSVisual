@@ -1,0 +1,436 @@
+:root {
+  /* ---- 品牌色 ---- */
+  --brand: #3b6ef6;
+  --brand-2: #6f9bff;
+  --brand-3: #9dbcff;
+  --brand-light: #eaf0ff;
+  --brand-deep: #1a47b8;
+
+  /* ---- 语义色 ---- */
+  --success: #22a06b;
+  --success-light: #e7f7ef;
+  --warning: #e8a13a;
+  --warning-light: #fdf3e2;
+  --danger: #e05252;
+  --danger-light: #fdeaea;
+  --purple: #8b5cf6;
+  --cyan: #0ea5e9;
+
+  /* ---- 文字 ---- */
+  --text: #1f2733;
+  --text-2: #5a6472;
+  --text-3: #8b95a3;
+
+  /* ---- 表面 ---- */
+  --border: #e3e8f0;
+  --border-2: #eef2f8;
+  --bg: #f5f7fb;
+  --card: #ffffff;
+
+  /* ---- 局部底色（原先散落各组件的硬编码底，统一收成变量以便夜间模式覆盖） ---- */
+  --header-bg: rgba(255, 255, 255, 0.86);
+  --footer-bg: rgba(255, 255, 255, 0.7);
+  --hover-bg: #f2f5fb;
+  --soft-bg: #f5f7fb;
+  --code-bg: #f7f9fc;
+  --inline-code-bg: #f2f4f8;
+  --th-bg: #f7f9fc;
+  --status-bg: #f4f8ff;
+  /* 可视化画布：SVG 里的字形颜色是硬编码的（#1f2733 / #8b95a3 等），
+     夜间模式下把画布本身保留成浅色「纸面」，64 个动画组件才不用逐个改色。 */
+  --vis-paper: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+  --vis-border: #e3e8f0;
+  --scroll-thumb: #cfd8e6;
+  --scroll-thumb-hover: #b4c0d4;
+
+  /* 内置编译器：底色 + 语法高亮配色（夜模式整体提亮） */
+  --editor-bg: #ffffff;
+  --editor-bar: #f8fafc;
+  --editor-fg: #1f2733;
+  --editor-ln: #a4b0c0;
+  --tk-com: #9aa5b1;
+  --tk-str: #22a06b;
+  --tk-num: #e8a13a;
+  --tk-kw: #8b5cf6;
+  --tk-fn: #3b6ef6;
+  --tk-op: #6b7787;
+
+  /* 浅色提示块上的深色字与描边（夜模式下由 html.dark 覆盖） */
+  --warn-strong: #8a5a00;
+  --warn-border: #ffd591;
+  --success-strong: #176b48;
+  --success-border: #bfe6d0;
+  --danger-strong: #b42318;
+  --danger-border: #f5c6c6;
+
+  /* ---- 圆角 / 阴影 / 渐变 ---- */
+  --radius: 14px;
+  --radius-sm: 9px;
+  --radius-lg: 20px;
+  --shadow: 0 2px 12px rgba(31, 39, 51, 0.06);
+  --shadow-md: 0 6px 20px rgba(31, 39, 51, 0.09);
+  --shadow-lg: 0 14px 40px rgba(31, 39, 51, 0.13);
+  --shadow-brand: 0 8px 24px rgba(59, 110, 246, 0.24);
+  --grad-brand: linear-gradient(135deg, #3b6ef6 0%, #6f9bff 100%);
+  --grad-page: radial-gradient(1200px 420px at 12% -8%, #eaf0ff 0%, rgba(234, 240, 255, 0) 62%),
+               radial-gradient(900px 380px at 92% 4%, #e9f7f1 0%, rgba(233, 247, 241, 0) 58%);
+}
+
+/* ---------- 夜间模式 ----------
+ * 只重写 CSS 变量：凡是用了 var(--x) 的地方自动跟随，组件本身不需要改。
+ * 少数历史硬编码底色（滚动条、代码块、表头）已收进变量，一并覆盖。
+ */
+html.dark {
+  color-scheme: dark;
+
+  /* 品牌色整体提亮：深色底上的蓝要更亮才压得住 */
+  --brand: #6f9bff;
+  --brand-2: #90b2ff;
+  --brand-3: #3f5ea8;
+  --brand-light: #1e2a45;
+  --brand-deep: #b9cdff;
+
+  --success: #35c48a;
+  --success-light: #16342a;
+  --warning: #f0b355;
+  --warning-light: #3a2c17;
+  --danger: #f2777a;
+  --danger-light: #3a1f24;
+  --purple: #a78bfa;
+  --cyan: #38bdf8;
+
+  --text: #e6ecf8;
+  --text-2: #a9b4c7;
+  --text-3: #7c8899;
+
+  --border: #2a3348;
+  --border-2: #232b3d;
+  --bg: #0f1420;
+  --card: #161d2b;
+
+  --header-bg: rgba(22, 29, 43, 0.86);
+  --footer-bg: rgba(22, 29, 43, 0.72);
+  --hover-bg: #1f2739;
+  --soft-bg: #1a2130;
+  --code-bg: #101724;
+  --inline-code-bg: #1f2739;
+  --th-bg: #1b2333;
+  --status-bg: #1b2740;
+
+  /* 内置编译器：深色底 + 提亮后的语法色 */
+  --editor-bg: #101724;
+  --editor-bar: #161d2b;
+  --editor-fg: #d7e0ee;
+  --editor-ln: #5c6a80;
+  --tk-com: #6b7a90;
+  --tk-str: #7ee2b0;
+  --tk-num: #f3c26b;
+  --tk-kw: #c3a6ff;
+  --tk-fn: #79a6ff;
+  --tk-op: #a9b4c7;
+
+  /* 浅色提示块（黄/红底）上的深色字，夜间模式要换成浅字才看得见 */
+  --warn-strong: #f0c98a;
+  --warn-border: #7a5a24;
+  --success-strong: #7ee2b0;
+  --success-border: #2c6b4f;
+  --danger-strong: #ffa3a3;
+  --danger-border: #7d3a3a;
+  --vis-paper: linear-gradient(180deg, #eef2f8 0%, #e7edf6 100%);
+  --vis-border: #cdd7e6;
+  --scroll-thumb: #39435a;
+  --scroll-thumb-hover: #4c5670;
+
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.36);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.44);
+  --shadow-lg: 0 14px 40px rgba(0, 0, 0, 0.52);
+  --shadow-brand: 0 8px 24px rgba(90, 130, 246, 0.3);
+  --grad-brand: linear-gradient(135deg, #4b7cf3 0%, #7aa2ff 100%);
+  --grad-page: radial-gradient(1200px 420px at 12% -8%, rgba(59, 110, 246, 0.16) 0%, rgba(59, 110, 246, 0) 62%),
+               radial-gradient(900px 380px at 92% 4%, rgba(34, 160, 107, 0.13) 0%, rgba(34, 160, 107, 0) 58%);
+}
+
+* { box-sizing: border-box; }
+
+html, body, #app {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background:
+    var(--grad-page),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: 'PingFang SC', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--brand); text-decoration: none; }
+
+/* 细腻的滚动条 */
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb); border-radius: 6px; border: 2px solid transparent; background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--scroll-thumb-hover); background-clip: content-box; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* 统一的过渡节奏 */
+.el-button, .el-card, .el-tag, .el-input__wrapper, .el-select__wrapper {
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.page {
+  padding: 22px 20px 40px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.muted { color: var(--text-2); }
+.small { font-size: 12px; }
+
+/* ---------- 通用装饰件 ---------- */
+
+/* 标题左侧的渐变竖条 */
+.section-title::before {
+  content: '';
+  width: 4px; height: 15px; border-radius: 3px;
+  background: var(--grad-brand);
+  flex-shrink: 0;
+}
+
+/* 悬浮抬升：卡片类交互的统一语言 */
+.hover-lift { transition: transform 0.24s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.24s, border-color 0.24s; }
+.hover-lift:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--brand-3); }
+
+/* 渐变文字 */
+.grad-text {
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 入场动画：页面级内容淡入上移 */
+.fade-up { animation: fade-up 0.42s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- 夜间模式下的可视化区：保留一块浅色「纸面」 ----------
+ * 71 个动画组件的字形、边框、面板底色大多是写死的浅色系（#1f2733 / #8b95a3 / #fbfcff …），
+ * 整页变黑会让它们大面积丢失对比度。这里在 .vis-frame 作用域内把浅色变量「还原」回去，
+ * 相当于给动画区一块独立的白纸；页面其余部分照常走深色。改一处，全部动画生效。 */
+html.dark .vis-frame,
+html.dark .vis-foot {
+  /* 光把变量还原还不够：color 默认是从 body 继承下来的浅色，这里显式落一次 */
+  color: var(--text);
+  --text: #1f2733;
+  --text-2: #5a6472;
+  --text-3: #8b95a3;
+  --border: #e3e8f0;
+  --border-2: #eef2f8;
+  --card: #ffffff;
+  --soft-bg: #f7f9fc;
+  --brand-light: #eaf0ff;
+  --brand-deep: #1a47b8;
+  --status-bg: #f4f8ff;
+  --vis-paper: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+  --vis-border: #e3e8f0;
+  --shadow: 0 2px 12px rgba(31, 39, 51, 0.06);
+  --shadow-md: 0 6px 20px rgba(31, 39, 51, 0.09);
+
+  /* Element Plus 也要跟着回到浅色，否则按钮 / 输入框会在白纸面上变成黑块 */
+  --el-bg-color: #ffffff;
+  --el-bg-color-page: #f5f7fb;
+  --el-bg-color-overlay: #ffffff;
+  --el-text-color-primary: #303133;
+  --el-text-color-regular: #606266;
+  --el-text-color-secondary: #909399;
+  --el-text-color-placeholder: #a8abb2;
+  --el-border-color: #dcdfe6;
+  --el-border-color-light: #e4e7ed;
+  --el-border-color-lighter: #ebeef5;
+  --el-border-color-extra-light: #f2f6fc;
+  --el-fill-color: #f0f2f5;
+  --el-fill-color-light: #f5f7fa;
+  --el-fill-color-lighter: #fafafa;
+  --el-fill-color-blank: #ffffff;
+  --el-fill-color-darker: #e6e8eb;
+}
+html.dark .vis-frame { background: #fff; }
+/* 画布边框用浅色，深色描边压在白纸面上太抢眼 */
+html.dark .vis-frame :where(.vis-canvas) { border-color: #e3e8f0; }
+
+/* ---------- 可视化通用画布 ----------
+   夜间模式下画布仍保留浅色纸面（--vis-paper）：动画里的字形、边框色大多是写死的
+   深色，画布跟着变黑会直接看不见。 */
+.vis-canvas {
+  background: var(--vis-paper);
+  border: 1px solid var(--vis-border);
+  border-radius: 12px;
+  padding: 14px;
+  overflow-x: auto;
+}
+
+.vis-node {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Markdown 内容 ----------
+   知识点正文里混排「概念表格 + 代码块」，两者都比容器宽时就会把外层卡片顶宽、
+   把右侧栏挤出去。这里的统一原则：**在内容自己的盒子里横向滚动**，
+   一行都不许把父容器撑大 —— 也就是说修完溢出，卡片宽度不变。 */
+.markdown-body { overflow-wrap: break-word; word-break: break-word; min-width: 0; }
+.markdown-body h2 {
+  font-size: 17px; margin: 20px 0 10px;
+  border-left: 4px solid var(--brand); padding-left: 10px; border-radius: 2px;
+}
+.markdown-body h3 { font-size: 15px; margin: 14px 0 6px; }
+.markdown-body p { line-height: 1.9; margin: 6px 0; }
+.markdown-body ul { padding-left: 20px; }
+.markdown-body li { line-height: 1.9; }
+.markdown-body code {
+  background: var(--inline-code-bg); padding: 1px 5px; border-radius: 4px; font-size: 13px;
+  font-family: 'Consolas', 'Menlo', monospace;
+  /* 行内代码里常是一长串类型签名 / 路径，断不开就会横向顶出去 */
+  overflow-wrap: anywhere;
+}
+/* 代码块：保留缩进与对齐，超宽部分自己滚动，不要让整张卡片跟着变宽 */
+.markdown-body pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 10px 0;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.markdown-body pre code {
+  display: block;
+  background: none;
+  padding: 0;
+  font-size: 12.5px;
+  line-height: 1.75;
+  white-space: pre;
+}
+/* 表格：列多时同样内部滚动。width: max-content 配合 max-width 才能既不被压缩变形、也不撑破父容器 */
+.markdown-body table {
+  border-collapse: collapse; width: max-content; max-width: 100%;
+  margin: 10px 0; display: block; overflow-x: auto;
+}
+.markdown-body th, .markdown-body td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
+.markdown-body th { background: var(--th-bg); }
+/* 长链接 / 公式 / 内联引语同样按一个字一个字断，避免顶宽 */
+.markdown-body a { overflow-wrap: anywhere; }
+.markdown-body blockquote {
+  margin: 10px 0; padding: 8px 14px; border-left: 3px solid var(--brand-3);
+  background: var(--soft-bg); border-radius: 0 8px 8px 0; color: var(--text-2);
+}
+.markdown-body img { max-width: 100%; height: auto; }
+
+/* ==========================================================================
+   响应式基础层
+   --------------------------------------------------------------------------
+   断点约定（与 layout/MainLayout.vue 保持一致）：
+     1280  大屏容器收窄
+     1024  小笔记本 / 平板横屏
+     900   顶栏切换为汉堡抽屉（MainLayout 里的 isNarrow 用同一个数值）
+     768   平板竖屏
+     600   折叠屏展开态 / 大屏手机横屏
+     480   手机竖屏
+     360   折叠屏外屏 / 极窄屏
+   原则：所有媒体资源默认不超出容器；卡片/表格/代码块这类「天生会超宽」的盒子
+   在自己内部横向滚动，绝不把父容器顶宽。
+   ========================================================================== */
+img, video, iframe, embed, object { max-width: 100%; }
+
+/* 折叠屏外屏极窄（360 及以下）时页面左右留白收到最小，能多出 4% 的正文宽度 */
+@media (max-width: 1280px) {
+  .page { padding: 20px 18px 36px; }
+}
+@media (max-width: 1024px) {
+  .page { padding: 18px 16px 32px; }
+}
+@media (max-width: 768px) {
+  .page { padding: 14px 12px 28px; }
+  .card { border-radius: 12px; }
+  .section-title { font-size: 15px; margin-bottom: 12px; }
+  /* 分页器在窄屏默认会横向溢出，这里允许换行并居中 */
+  .el-pagination {
+    flex-wrap: wrap !important;
+    justify-content: center;
+    row-gap: 8px;
+  }
+  .el-pagination > * { margin: 0 4px !important; }
+  /* 弹窗 / 消息框宽度写死时（width="600px"）会顶出视口，统一收口 */
+  .el-dialog,
+  .el-message-box,
+  .el-overlay .el-drawer {
+    max-width: calc(100vw - 28px) !important;
+  }
+  .el-dialog { margin: 0 auto; }
+  /* 表单在窄屏别再标签 / 控件左右分栏，改成上下堆叠 */
+  .el-form-item__label { padding-bottom: 2px !important; }
+}
+@media (max-width: 600px) {
+  .page { padding: 12px 10px 24px; }
+  /* 横向排布的表头工具栏：允许换行，别把按钮挤出屏幕 */
+  .el-table__header-wrapper,
+  .el-table__body-wrapper { overflow-x: auto; }
+}
+@media (max-width: 480px) {
+  .page { padding: 10px 8px 22px; }
+  .card { border-radius: 10px; }
+  .section-title { font-size: 14px; }
+  /* 表格列多时内部横滚，卡片宽度保持不变 */
+  .el-table { font-size: 12.5px; }
+  .el-button { padding: 8px 12px; }
+  .el-tag { max-width: 100%; }
+  /* el-row 的 gutter 是负外边距实现的（左右各 -8px），容器留白不足 8px 时
+     整行就会顶出视口 —— 折叠屏外屏（280px）上实测溢出 2px。
+     窄屏把槽宽收一半，既保住列间距，也不会再溢出。 */
+  .el-row { margin-left: -5px !important; margin-right: -5px !important; }
+  .el-col { padding-left: 5px !important; padding-right: 5px !important; }
+}
+@media (max-width: 360px) {
+  .page { padding: 10px 8px 20px; }
+  html, body { font-size: 13px; }
+  /* 分页器：翻页按钮组也允许换行，并藏掉「跳至 / 共 N 条」这类次要信息，
+     7 个页码在 280px 下就能两行排完，不再横向溢出 */
+  .el-pager { flex-wrap: wrap !important; justify-content: center; row-gap: 6px; }
+  .el-pagination {
+    --el-pagination-button-width: 28px;
+    --el-pagination-button-height: 28px;
+    --el-pagination-item-gap: 8px;
+  }
+  .el-pagination__jump,
+  .el-pagination__total,
+  .el-pagination__sizes { display: none !important; }
+}
+
+/* 尊重「减少动态效果」的系统设置 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

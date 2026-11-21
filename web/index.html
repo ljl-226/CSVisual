@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 地址栏 / 标签页图标：与顶栏 logo 同一张图（tools/extract_logo.py 从设计稿抠出）。
+         先给 32×32（绝大多数浏览器按这个尺寸取），再给 16×16 兜底给高分屏，
+         最后 apple-touch-icon 给 iOS 加到主屏。 -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon180.png" />
+    <meta name="theme-color" content="#3b6ef6" />
+    <!-- 内容安全策略：只信本站与项目自身资源。
+         作用是把 XSS 的后果压到最小 —— 即便某段富文本漏过了 DOMPurify，
+         注入的代码也无处可加载、无处可外传（没有 connect-src 白名单里的目标）。
+         · script-src 保留 unsafe-inline/unsafe-eval：Element Plus 与 Vite 开发服务
+           会注入内联脚本与样式，去掉会直接白屏
+         · 这里不写 frame-ancestors —— <meta> 形式的 CSP 不支持该指令，
+           点击劫持交给后端响应头 X-Frame-Options: DENY 与部署层的 nginx 头 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' ws: wss: https:; object-src 'none'; base-uri 'self'" />
+    <title>CSVisual · 计算机可视化智能学习平台</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

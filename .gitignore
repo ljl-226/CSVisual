@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+*.log
+.uploads/
+.DS_Store
+.vite/
+
+# 安装包与构建中间产物（65MB 的 exe 和几百 MB 的便携目录不该进 git）
+build/
+CSVisual-Setup.exe
+CSVisual-绿色运行包.zip
